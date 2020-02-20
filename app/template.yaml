@@ -14,7 +14,7 @@ Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: app/
+      CodeUri: ./
       Handler: app.lambdaHandler
       Layers:
         - !Ref Layer
@@ -28,7 +28,7 @@ Resources:
   HelloWorldFunction2:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: app/
+      CodeUri: ./
       Handler: app2.lambdaHandler
       Layers:
         - !Ref Layer
@@ -39,12 +39,40 @@ Resources:
           Properties:
             Path: /hello-2
             Method: get
+  HelloWorldFunction3:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ./
+      Handler: app3.lambdaHandler
+      Layers:
+        - !Ref Layer
+      Runtime: nodejs12.x
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /hello-3
+            Method: get
+  HelloWorldFunction4:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ./
+      Handler: app4.lambdaHandler
+      Layers:
+        - !Ref Layer
+      Runtime: nodejs12.x
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /hello-4
+            Method: get
   Layer:
     Type: AWS::Serverless::LayerVersion
     Properties:
         LayerName: layer
         Description: Common layer
-        ContentUri: layer/nodejs.zip
+        ContentUri: ../layer/nodejs.zip
         CompatibleRuntimes:
           - nodejs12.x
         RetentionPolicy: Delete

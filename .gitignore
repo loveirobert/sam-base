@@ -16,6 +16,12 @@
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
 
+*.zip
+
+.aws-sam
+packaged.yaml
+
+
 ### Node ###
 # Logs
 logs

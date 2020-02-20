@@ -1,5 +1,6 @@
-// const axios = require('axios')
+const axios = require('axios')
 // const url = 'http://checkip.amazonaws.com/';
+const moment = require('moment');
 let response;
 
 /**
@@ -20,7 +21,7 @@ exports.lambdaHandler = async () => {
     response = {
       'statusCode': 200,
       'body': JSON.stringify({
-        message: 'same base template test response',
+        message: moment(),
         // location: ret.data.trim()
       })
     }

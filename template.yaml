@@ -16,6 +16,8 @@ Resources:
     Properties:
       CodeUri: app/
       Handler: app.lambdaHandler
+      Layers:
+        - !Ref Layer
       Runtime: nodejs12.x
       Events:
         HelloWorld:
@@ -28,6 +30,8 @@ Resources:
     Properties:
       CodeUri: app/
       Handler: app2.lambdaHandler
+      Layers:
+        - !Ref Layer
       Runtime: nodejs12.x
       Events:
         HelloWorld:
@@ -35,6 +39,15 @@ Resources:
           Properties:
             Path: /hello-2
             Method: get
+  Layer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+        LayerName: layer
+        Description: Common layer
+        ContentUri: layer/nodejs.zip
+        CompatibleRuntimes:
+          - nodejs12.x
+        RetentionPolicy: Delete
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

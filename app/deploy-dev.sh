@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # npm run build
-rm -rf ../.aws-sam/*
+rm -rf ./.aws-sam/*
 rm ../layer/nodejs.zip
 cd ../layer
 zip ./nodejs.zip -r ./nodejs/*

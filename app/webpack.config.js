@@ -7,7 +7,7 @@ module.exports = function (env) {
   const file = fs.readFileSync('./template.yaml', 'utf8');
   const template = YAML.parse(file);
   let lambdas = Object.keys(template.Resources).filter(name => template.Resources[name].Type === 'AWS::Serverless::Function');
-  lambdas = lambdas.map(name => console.log(template.Resources[name].Properties.Handler) || [template.Resources[name].Properties.Handler.replace('.lambdaHandler', '.js'), name]);
+  lambdas = lambdas.map(name => [template.Resources[name].Properties.Handler.replace('.lambdaHandler', '.js'), name]);
   return lambdas
     .map(([fxn, dir]) => ({
       mode: 'production',

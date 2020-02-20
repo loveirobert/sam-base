@@ -15,7 +15,7 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ./
-      Handler: app.lambdaHandler
+      Handler: ./src/app.lambdaHandler
       Layers:
         - !Ref Layer
       Runtime: nodejs12.x
@@ -29,7 +29,7 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ./
-      Handler: app2.lambdaHandler
+      Handler: ./src/app2.lambdaHandler
       Layers:
         - !Ref Layer
       Runtime: nodejs12.x
@@ -43,7 +43,7 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ./
-      Handler: app3.lambdaHandler
+      Handler: ./src/app3.lambdaHandler
       Layers:
         - !Ref Layer
       Runtime: nodejs12.x
@@ -57,7 +57,7 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ./
-      Handler: app4.lambdaHandler
+      Handler: ./src/app4.lambdaHandler
       Layers:
         - !Ref Layer
       Runtime: nodejs12.x
@@ -67,6 +67,62 @@ Resources:
           Properties:
             Path: /hello-4
             Method: get
+  HelloWorldFunction5:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ./
+      Handler: ./src/app5.lambdaHandler
+      Layers:
+        - !Ref Layer
+      Runtime: nodejs12.x
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /hello-5
+            Method: get
+  HelloWorldFunction6:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ./
+      Handler: ./src/app6.lambdaHandler
+      Layers:
+        - !Ref Layer
+      Runtime: nodejs12.x
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /hello-6
+            Method: get
+  HelloWorldFunction7:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ./
+      Handler: ./src/app7.lambdaHandler
+      Layers:
+        - !Ref Layer
+      Runtime: nodejs12.x
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /hello-7
+            Method: get
+  HelloWorldFunction8:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ./
+      Handler: ./src/app8.lambdaHandler
+      Layers:
+        - !Ref Layer
+      Runtime: nodejs12.x
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /hello-8
+            Method: get  
   Layer:
     Type: AWS::Serverless::LayerVersion
     Properties:

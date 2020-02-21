@@ -15,6 +15,14 @@ Globals:
       - !Ref Layer
 
 Resources:
+  #Event source mappings
+  MyQDigestFunctionEventSourceMapping:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      BatchSize: 1
+      Enabled: true
+      EventSourceArn: !GetAtt MyQ.Arn
+      FunctionName: !GetAtt MyQDigestFunction.Arn
   # API Gateway functions:
   HelloWorldFunction:
     Type: AWS::Serverless::Function
@@ -90,13 +98,45 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: app8.lambdaHandler
+      Environment:
+        Variables:
+          MyQARN: !GetAtt MyQ.Arn
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - "sqs:SendMessage"
+              Resource:
+                - !GetAtt MyQ.Arn
       Events:
         HelloWorld:
           Type: Api
           Properties:
             Path: /hello-8
             Method: get
-  
+
+  # Functions
+  MyQDigestFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./src/logic/
+      Handler: myq-message-handler.lambdaHandler
+      Environment:
+        Variables:
+          MyQARN: !GetAtt MyQ.Arn
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - "sqs:ReceiveMessage"
+                - "sqs:DeleteMessage"
+                - "sqs:GetQueueAttributes"
+                - "sqs:ChangeMessageVisibility"
+              Resource:
+                - !GetAtt MyQ.Arn
+
   # Node package layer:
   Layer:
     Type: AWS::Serverless::LayerVersion

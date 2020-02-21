@@ -4,7 +4,7 @@
 rm -rf ./.aws-sam/*
 rm ../layer/nodejs.zip
 cd ../layer
-zip ./nodejs.zip -r ./nodejs/*
+zip ./nodejs.zip -r ./nodejs/* > /dev/null
 cd ../app
 node prepare-functions-to-deploy.js
 sam package --output-template-file packaged.yaml --s3-bucket sam-base

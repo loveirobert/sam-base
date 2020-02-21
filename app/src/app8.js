@@ -2,8 +2,9 @@ const AWS = require('aws-sdk');
 const moment = require('moment');
 
 exports.lambdaHandler = async () => {
+  let response;
   const sqs = new AWS.SQS({apiVersion: '2012-11-05'});
-  const [, , resource, region, iamUser, resourceName] = process.env.MyQARN.split(':');
+  const [, , resource, region, iamUser, resourceName] = process.env.MyQARN.split(':'); // eslint-disable-line
   const queueUrl = `https://${resource}.${region}.amazonaws.com/${iamUser}/${resourceName}`;
   try {
     const params = {
@@ -11,7 +12,7 @@ exports.lambdaHandler = async () => {
       QueueUrl: queueUrl,
     };
 
-    await new Promise((res, rej) => {
+    await new Promise((res) => {
       sqs.sendMessage(params, function(msgError, data) {
         if (msgError) {
           console.log("Error", msgError);

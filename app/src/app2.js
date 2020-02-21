@@ -21,7 +21,7 @@ exports.lambdaHandler = async () => {
     response = {
       'statusCode': 200,
       'body': JSON.stringify({
-        message: `add some extra here ... ${moment()} 2`,
+        message: `add some extra here ... ${moment()} 2, and some more and more....`,
         // location: ret.data.trim()
       })
     }
